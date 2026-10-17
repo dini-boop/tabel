@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:html' as html;
-
+import 'package:url_launcher/url_launcher.dart';
 void main() {
   runApp(const MyApp());
 }
