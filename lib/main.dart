@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -11,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Data Siswa',
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Data Siswa XI PPLG 2'),
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Table(
-              border: TableBorder.all(),
+              border: TableBorder.all(color: Colors.black54),
               defaultColumnWidth: const IntrinsicColumnWidth(),
               children: [
                 TableRow(
@@ -107,8 +110,13 @@ class MyApp extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: InkWell(
-        onTap: () {
-          html.window.open(url, '_blank');
+        onTap: () async {
+          final uri = Uri.parse(url);
+
+          await launchUrl(
+            uri,
+            mode: LaunchMode.externalApplication,
+          );
         },
         child: Text(
           text,
