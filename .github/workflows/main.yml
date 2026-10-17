@@ -1,9 +1,10 @@
+
 name: Build Flutter APK
 
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:
 
 jobs:
@@ -19,6 +20,11 @@ jobs:
         with:
           channel: stable
 
+      - name: Check project files
+        run: |
+          ls -la
+          test -f pubspec.yaml || (echo "pubspec.yaml tidak ditemukan di folder utama" && exit 1)
+
       - name: Install dependencies
         run: flutter pub get
 
@@ -28,5 +34,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: flutter-apk
+          name: aplikasi-flutter-apk
           path: build/app/outputs/flutter-apk/app-release.apk
